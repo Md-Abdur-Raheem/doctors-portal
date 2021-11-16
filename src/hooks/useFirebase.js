@@ -14,7 +14,7 @@ const useFirebase = () => {
     const googleProvider = new GoogleAuthProvider();
 
 
-    const registerUser = (name, email, password, history) => {
+    const registerUser = (name, email, password, navigate) => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -31,7 +31,7 @@ const useFirebase = () => {
                 setUser(user);
                 saveUser(email, name, 'POST')
                 setError('');
-                history.replace('/')
+                navigate('/')
             })
             .catch((error) => {
                 setError(error.message);
@@ -39,13 +39,13 @@ const useFirebase = () => {
             .finally(() => setLoading(false));
     }
 
-    const logIn = (email, password, location, history) => {
+    const logIn = (email, password, location, navigate) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setUser(userCredential.user);
                 setError('');
                 const destination = location.state?.from || '/';
-                history.replace(destination);
+                navigate(destination);
             })
             .catch((error) => {
                 setError(error.message);
@@ -53,7 +53,7 @@ const useFirebase = () => {
             .finally(() => setLoading(false));
     }
 
-    const googleSignIn = (location, history) => {
+    const googleSignIn = (location, navigate) => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
         .then((result) => {    
@@ -62,7 +62,7 @@ const useFirebase = () => {
             saveUser(user.email, user.displayName, 'PUT');
             setError('');
             const destination = location.state?.from || '/';
-            history.replace(destination);
+            navigate(destination);
         })
         .catch((error) => {
             setError(error.message)
@@ -105,7 +105,7 @@ const useFirebase = () => {
         fetch(`https://pure-journey-93406.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => {
-                setAdmin(data.admin)
+                setAdmin(data.isAdmin)
             })
     },[user.email])
     

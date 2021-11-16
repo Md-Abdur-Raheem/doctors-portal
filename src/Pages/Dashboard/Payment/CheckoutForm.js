@@ -46,7 +46,6 @@ const CheckoutForm = ({ appointment }) => {
         }
         else {
             setError('');
-            console.log(paymentMethod);
         }
 
         //payment intent
@@ -68,7 +67,6 @@ const CheckoutForm = ({ appointment }) => {
         else {
             setError('');
             setSuccess('Your payment process successfully')
-            console.log(paymentIntent);
             setProcessing(false);
             const payment = {
                 amount: paymentIntent.amount,
@@ -82,8 +80,7 @@ const CheckoutForm = ({ appointment }) => {
                 body: JSON.stringify(payment)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
-
+                .then(data => data)
         }
         
     }

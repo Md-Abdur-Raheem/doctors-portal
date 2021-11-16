@@ -16,17 +16,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {
-  Switch,
-  Route,
-  NavLink,
-  useRouteMatch
+  Outlet,
+  NavLink
 } from "react-router-dom";
-import DashBoardHome from './DashboardHome/DashBoardHome';
-import MakeAdmin from '../MakeAdmin/MakeAdmin';
-import AddDoctor from '../AddDoctor/AddDoctor';
+
 import useAuth from '../../../hooks/useAuth';
-import AdminRoute from '../../Login/AdminRoute/AdminRoute';
-import Payment from '../Payment/Payment';
+
 
 
 
@@ -36,7 +31,6 @@ import Payment from '../Payment/Payment';
 const drawerWidth = 200;
 
 function Dashboard(props) {
-  let { path, url } = useRouteMatch();
   const { admin } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -44,19 +38,20 @@ function Dashboard(props) {
     setMobileOpen(!mobileOpen);
   };
 
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <NavLink to="/appointment">Appointment</NavLink>
       <br/>
-      <NavLink to={`${url}`}>Dashboard</NavLink>
+      <NavLink to="/dashboard">Dashboard</NavLink>
       <br/>
       {
         admin && <Box>
-          <NavLink to={`${url}/makeAdmin`}>Make Admin</NavLink>
+          <NavLink to={`/dashboard/makeAdmin`}>Make Admin</NavLink>
           <br/>
-          <NavLink to ={`${url}/addDoctor`}>Add Doctor</NavLink>
+          <NavLink to ={`/dashboard/addDoctor`}>Add Doctor</NavLink>
         </Box>
       }
       <List>
@@ -138,20 +133,7 @@ function Dashboard(props) {
         <Toolbar />
 
         
-        <Switch>
-        <Route exact path={path}>
-          <DashBoardHome></DashBoardHome>
-        </Route>
-        <Route path={`${path}/payment/:appointmentId`}>
-          <Payment></Payment>
-        </Route>
-          <AdminRoute path={`${path}/makeAdmin`}>
-            <MakeAdmin></MakeAdmin>
-        </AdminRoute>
-          <AdminRoute path={`${path}/addDoctor`}>
-            <AddDoctor></AddDoctor>
-        </AdminRoute>
-      </Switch>
+        <Outlet></Outlet>
             
       </Box>
     </Box>

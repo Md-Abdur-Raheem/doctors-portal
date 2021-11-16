@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import login from '../../../images/login.png'
 import { Alert, Button, CircularProgress, Container, TextField, Typography } from '@mui/material';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { Box } from '@mui/system';
 
@@ -11,7 +11,7 @@ const Register = () => {
     const { user, registerUser, loading, error } = useAuth();
     const [loginData, setLoginData] = useState({});
     const [passwordError, setPasswordError] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
     
     const handleOnChange = event => {
         const field = event.target.name;
@@ -32,7 +32,7 @@ const Register = () => {
             const name = loginData?.name;
             const email = loginData?.email;
             const password = loginData?.password;
-            registerUser(name, email, password, history);
+            registerUser(name, email, password, navigate);
         }
         e.preventDefault();
 

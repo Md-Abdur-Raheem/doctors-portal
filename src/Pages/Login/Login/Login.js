@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import login from '../../../images/login.png'
 import { Alert, Button, CircularProgress, Container, TextField, Typography } from '@mui/material';
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { Box } from '@mui/system';
 
@@ -11,7 +11,7 @@ const Login = () => {
     const [loginData, setLoginData] = useState({});
     const { user, logIn, loading, error, googleSignIn } = useAuth();
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     
     const handleOnChange = event => {
         const field = event.target.name;
@@ -22,7 +22,7 @@ const Login = () => {
         
     }
     const handleLoginSubmit = e => {
-        logIn(loginData?.email, loginData?.password, location, history);
+        logIn(loginData?.email, loginData?.password, location, navigate);
         e.preventDefault();
     }
 
@@ -98,7 +98,7 @@ const Login = () => {
                             <br />
                             <p>--------------------------------</p>
                             <Button
-                                onClick={()=>googleSignIn(location, history)}
+                                onClick={()=>googleSignIn(location, navigate)}
                                 variant="text"
                             >
                                 Login with google
