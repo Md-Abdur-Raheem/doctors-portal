@@ -10,37 +10,43 @@ const timeSlots = [
         id: 1,
         serviceName: 'Teeth Orthodontics',
         time: '08.00 AM - 09.00 AM',
-        space: 10
+        space: 10,
+        price: 20
     },
     {
         id: 2,
         serviceName: 'Cosmetic Dentisty',
         time: '08.00 AM - 09.00 AM',
-        space: 8
+        space: 8,
+        price: 25
     },
     {
         id: 3,
         serviceName: 'Teeth cleaning',
         time: '08.00 AM - 09.00 AM',
-        space: 10
+        space: 10,
+        price: 30
     },
     {
         id: 4,
         serviceName: 'Cavity Protection',
         time: '08.00 AM - 09.00 AM',
-        space: 10
+        space: 10,
+        price: 18
     },
     {
         id: 5,
         serviceName: 'Oral Surgery',
         time: '08.00 AM - 09.00 AM',
-        space: 10
+        space: 10,
+        price: 15
     },
     {
         id: 6,
         serviceName: 'Padiatric Dental',
         time: '08.00 AM - 09.00 AM',
-        space: 10
+        space: 10,
+        price: 25
     }
 ]
 
@@ -94,8 +100,11 @@ const AvailableAppointments = ({ date }) => {
                                     </Typography>
                                     <Typography
                                         variant="body1">
-                                        {slot.space}
-                                        spaces availavle
+                                        Fee: ${slot.price}
+                                    </Typography>
+                                    <Typography
+                                        variant="body1">
+                                        {slot.space} spaces availavle
                                     </Typography>
                                     <br /><br />
                                     <Button

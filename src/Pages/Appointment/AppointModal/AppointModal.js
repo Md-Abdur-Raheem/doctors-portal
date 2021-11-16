@@ -24,7 +24,7 @@ const style = {
 
 
 const AppointModal = ({ open, handleClose, slot, date, setOpen,setAppointSuccess }) => {
-  const { serviceName, time } = slot;
+  const { serviceName, time, price } = slot;
   const { user } = useAuth();
 
   const initialInfo = {patientName: user.displayName, email: user.email, phone: ''}
@@ -35,7 +35,7 @@ const AppointModal = ({ open, handleClose, slot, date, setOpen,setAppointSuccess
       const value = event.target.value;
       const newAppointInfo = { ...appointInfo };
       newAppointInfo[field] = value;
-      const newAppointment = { serviceName, time, date: date.toDateString(), ...newAppointInfo };
+      const newAppointment = { serviceName, time, price, date: date.toDateString(), ...newAppointInfo };
       setAppointInfo(newAppointment);
     }
 

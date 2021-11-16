@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { NavLink } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const Appointments = ({date}) => {
     const { user } = useAuth();
@@ -43,7 +45,8 @@ const Appointments = ({date}) => {
                   {appointment.patientName}
                 </TableCell>
                 <TableCell align="center">{appointment.time}</TableCell>
-                <TableCell align="center">Approved</TableCell>
+                            <TableCell align="center">{appointment.payment ?
+                              'Paid' : <NavLink to={`/dashboard/payment/${appointment._id}`}><Button>Pay</Button></NavLink>}</TableCell>
               </TableRow>
                         ))
                     }
